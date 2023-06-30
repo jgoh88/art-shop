@@ -6,6 +6,7 @@ const morgan = require('morgan')
 require('dotenv').config()
 
 // import controllers
+const userController = require('./controllers/user.controller')
 
 
 const PORT = process.env.PORT
@@ -18,6 +19,6 @@ server.use(express.json())
 server.use(morgan('dev'))
 
 // use controllers
-
+server.use('/user', userController)
 
 server.listen(PORT, () => console.log(`Running on port ${PORT}`))
