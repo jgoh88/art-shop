@@ -11,7 +11,10 @@ const userController = require('./controllers/user.controller')
 
 const PORT = process.env.PORT
 const server = express()
-mongoose.connect(process.env.MONGODB)
+mongoose.connect(process.env.MONGODB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => console.log('Connected to mongdb'))
 
 server.use(cors())
