@@ -3,7 +3,9 @@ import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from "./components/Home";
+import { UserProvider } from './hooks/useUserHook';
 import MyArt from "./components/myArt";
+
 
 
 function App() {
@@ -15,7 +17,6 @@ function App() {
         <Route path={'/login'} element={<Login />} />
         <Route path={"/"} element={<Home />} />
         <Route path={"/myart"} element={<MyArt />} />
-
       </Routes>
     </BrowserRouter>
   );

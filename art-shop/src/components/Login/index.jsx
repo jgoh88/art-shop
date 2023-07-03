@@ -1,16 +1,23 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import { useNavigate, Link } from "react-router-dom"
+import { useUserHook } from "../../hooks/useUserHook"
 
 export default function Login() {
-
     const navigate = useNavigate()
+    const userHook = useUserHook()
     const [errorMessage, setErrorMessage] = useState('')
     const [formInput, setFormInput] = useState({
         username: '',
         password: '',
     })
+
+    useEffect(() => {
+        if (userHook.user) {
+            navigate('/')
+        }
+    }, [userHook.user])
 
     function onFormChangeHandler(e) {
         setFormInput((prevState) => ({...prevState, [e.target.name]: e.target.value,}))
@@ -22,8 +29,7 @@ export default function Login() {
         try {
             const res = await axios.post('http://localhost:4000/user/login', formInput)
             if (res.status === 200) {
-                sessionStorage.setItem('token', res.data.token)
-                sessionStorage.setItem('user', JSON.stringify(res.data.user))
+                userHook.storeUser(res.data.user)
                 navigate('/')
             }
         } catch (err) {
