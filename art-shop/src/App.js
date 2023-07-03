@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from "./components/Home";
+import MyArt from "./components/myArt";
 
 
 function App() {
