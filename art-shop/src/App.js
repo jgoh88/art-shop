@@ -11,13 +11,15 @@ import MyArt from "./components/myArt";
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path={'/signup'} element={<Signup />} />
-        <Route path={'/login'} element={<Login />} />
-        <Route path={"/"} element={<Home />} />
-        <Route path={"/myart"} element={<MyArt />} />
-      </Routes>
+      <UserProvider>
+        <NavBar />
+        <Routes>
+          <Route path={'/signup'} element={<Signup />} />
+          <Route path={'/login'} element={<Login />} />
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/myart"} element={<MyArt />} />
+        </Routes>
+      </UserProvider>
     </BrowserRouter>
   );
 }
