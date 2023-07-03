@@ -15,7 +15,7 @@ router.get("/myart", authenticateUser, async (req, res) => {
     }
 });
   
-  router.post("/myart", async (req, res) => {
+  router.post("/myart", authenticateUser, async (req, res) => {
     try {
       const artwork = new artModel(req.body);
       await artwork.save();
