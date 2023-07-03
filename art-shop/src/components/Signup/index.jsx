@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import { useNavigate, Link } from "react-router-dom"
+import { useUserHook } from "../../hooks/useUserHook"
 
 export default function Signup() {
 
     const navigate = useNavigate()
+    const userHook = useUserHook()
     const [formInput, setFormInput] = useState({
         username: '',
         password: '',
@@ -16,6 +18,12 @@ export default function Signup() {
         seller: '',
     })
     const [errorMessage, setErrorMessage] = useState('')
+
+    useEffect(() => {
+        if (userHook.user) {
+            navigate('/')
+        }
+    }, [userHook.user])
 
     function onFormChangeHandler(e) {
         let value
@@ -33,8 +41,7 @@ export default function Signup() {
         try {
             const res = await axios.post('http://localhost:4000/user', formInput)
             if (res.status === 200) {
-                sessionStorage.setItem('token', res.data.token)
-                sessionStorage.setItem('user', JSON.stringify(res.data.user))
+                userHook.storeUser(res.data.user)
                 navigate('/')
             }
         } catch (err) {
