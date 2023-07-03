@@ -6,9 +6,11 @@ const User = require('../models/user.model')
 require('dotenv').config()
 
 router.post('/', async (req, res) => {
-    if (!req.body || !req.body.username || !req.body.email || !req.body.fullName || !req.body.password || !req.body.contactNo || !req.body.address || !req.body.profilePic) {
+    if (!req.body || !req.body.username || !req.body.email || !req.body.fullName || !req.body.password || !req.body.contactNo || !req.body.address) {
         return res.status(400).json({message: responseList.BAD_REQUEST})
     }
+    req.body.seller = !!req.body?.seller
+    console.log(req.body)
     try {
         const user = new User(req.body)
         await user.save()
@@ -20,8 +22,9 @@ router.post('/', async (req, res) => {
         }
         return res.status(200).json({message: responseList.CREATED_SUCCESS, token: token, user: userInfo})
     } catch (err) {
+        console.log(err)
         if (err.name === 'MongoServerError' && err.code === 11000) {
-            return res.status(200).json({message: responseList.DUPLICATE_USERNAME_EMAIL})
+            return res.status(400).json({message: responseList.DUPLICATE_USERNAME_EMAIL})
         }
         return res.status(500).json({message: responseList.SOMETHING_WRONG})
     }
