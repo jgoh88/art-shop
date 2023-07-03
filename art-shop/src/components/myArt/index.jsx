@@ -1,28 +1,44 @@
-import {Col, Row, Card, Button} from "react-bootstrap";
+import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React from "react";
 
-export default function Home({onSelectProduct, product, addItemToCart}){
+<div>Welcome to myArt</div>
+
+export default function MyArt({update, remove, add, onSelectArt, art}){
 
   return (
-    <Col md={3} className={"mb-3"}>
+    <Container>
+
+      <Row className="mt-3 text-center">
+        <Col>
+          <h1>My Art Seller Centre</h1>
+        </Col>
+      </Row>
+
+<Col md={3} className={"mb-3"}>
     <Card>
-      <Card.Img onClick={onSelectProduct} variant="top" src={product.imageURL || "http://placehold.it/200x200"} />
+      <Card.Img onClick={onSelectArt} variant="top" src={art.imageURL || "http://placehold.it/200x200"} />
       <Card.Body>
         <Row>
-          <Col onClick={onSelectProduct}>
+          <Col onClick={onSelectArt}>
             <div>
-              <div className={`fw-bold`}>RM {product.price}</div>
+              <div className={`fw-bold`}>RM {art.price}</div>
             </div>
-            <div>{product.name}</div>
+            <div>{art.name}</div>
           </Col>
           <Col>
-            { product.quantity > 0 ? <Button onClick={addItemToCart}>Add to cart</Button>  : <div>No stock</div>}
+            <Button onClick={update}>Update</Button>
+            <Button onClick={remove}>Remove</Button>
           </Col>
         </Row>
       </Card.Body>
     </Card>
   </Col>
+
+<Button onClick={add}>Add New Art</Button>
+    </Container>
+    
   );
 }
 
-<div>Welcome to myArt</div>
+
+
