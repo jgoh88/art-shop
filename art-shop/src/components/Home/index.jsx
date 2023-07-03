@@ -1,154 +1,26 @@
 import {Col, Row, Card, Button} from "react-bootstrap";
 import React from "react";
 
-export default function Home(){
+export default function Home({onSelectProduct, product, addItemToCart}){
 
-    return (
-<div>
-<Row>
-<Col md={3} className={"mb-3"}>
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </Col>
-
+  return (
     <Col md={3} className={"mb-3"}>
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </Col>
-
-    <Col md={3} className={"mb-3"}>
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </Col>
-
-    <Col md={3} className={"mb-3"}>
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-
-      <Card>
-        <Card.Img variant="top" src = "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQeO5u147tmqnxudD7B0whlW-N9Pr7LSyPQ6tFP6FiDLgucRYmQzvWMKqwtDATOZHItH3HgvryM3xpiZs" />
-        <Card.Body>
-          <Row>
-            <Col>
-              <div>
-                <div className={`fw-bold' "text-decoration-line-through"`}>RM 5000</div>
-              </div>
-              <div>Hamster NFT</div>
-            </Col>
-            <Col>
-              <Button>Add to cart</Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </Col>
-</Row>
-</div>
-)}
+    <Card>
+      <Card.Img onClick={onSelectProduct} variant="top" src={product.imageURL || "https://img.freepik.com/premium-vector/cute-hamster-illustration-hamster-kawaii-chibi-vector-drawing-style-hamster-cartoon_622550-41.jpg?w=740"} />
+      <Card.Body>
+        <Row>
+          <Col onClick={onSelectProduct}>
+            <div>
+              <div className={`fw-bold`}>RM {product.price}</div>
+            </div>
+            <div>{product.name}</div>
+          </Col>
+          <Col>
+            { product.quantity > 0 ? <Button onClick={addItemToCart}>Add to cart</Button>  : <div>No stock</div>}
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  </Col>
+  );
+}
