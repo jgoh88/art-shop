@@ -30,11 +30,11 @@ const artSchema = new Schema({
         },
         username: {
             type: String,
-            required: true,
+            required: false,
         },
         fullName: {
             type: String,
-            required: true,
+            required: false,
         }
     }
 }, {timestamps: true})
