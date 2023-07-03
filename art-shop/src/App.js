@@ -4,6 +4,8 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from "./components/Home";
 import { UserProvider } from './hooks/useUserHook';
+import MyArt from "./components/myArt";
+
 
 
 function App() {
