@@ -6,7 +6,7 @@ export default function Home({onSelectProduct, product, addItemToCart}){
   return (
     <Col md={3} className={"mb-3"}>
     <Card>
-      <Card.Img onClick={onSelectProduct} variant="top" src={product.imageURL || "https://img.freepik.com/premium-vector/cute-hamster-illustration-hamster-kawaii-chibi-vector-drawing-style-hamster-cartoon_622550-41.jpg?w=740"} />
+      <Card.Img onClick={onSelectProduct} variant="top" src={product.imageURL || "http://placehold.it/200x200"} />
       <Card.Body>
         <Row>
           <Col onClick={onSelectProduct}>
