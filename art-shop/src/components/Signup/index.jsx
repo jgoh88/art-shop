@@ -3,6 +3,7 @@ import axios from "axios"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import { useNavigate, Link } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 
 export default function Signup() {
 
@@ -75,6 +76,11 @@ export default function Signup() {
             <Row className="mt-3 justify-content-center">
                 <Col xs={6} className="text-center justify-content-center">
                     <Form className="border border-dark-subtle pt-5 pb-4 ps-4 pe-4" onSubmit={onFormSubmitHandler}>
+                        <div className="d-flex justify-content-center mb-3">
+                            <div className="border border-dark-subtle bg-primary d-flex align-items-center justify-content-center" style={{width: 60, height: 60, borderRadius: '100%'}}>
+                                <AppRegistrationIcon sx={{ fontSize: 40 }}/>
+                            </div>
+                        </div>
                         {errorMessage !== '' 
                         ? <div>
                             <p className="text-danger fw-bold">{errorMessage}</p>
