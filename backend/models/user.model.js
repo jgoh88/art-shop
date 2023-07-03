@@ -31,7 +31,7 @@ const userSchema = new Schema({
     },
     profilePic: {
         type: String,
-        required: true,
+        default: 'https://placehold.co/200x200',
     },
     seller: {
         type: Boolean,
