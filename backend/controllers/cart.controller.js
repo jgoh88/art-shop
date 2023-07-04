@@ -5,8 +5,15 @@ const User = require('../models/user.model')
 const Art = require('../models/art.model')
 const authenticateUser = require('../middlewares/auth.middleware')
 
-router.get('/', authenticateUser, (req, res) => {
-    return res.status(200).json(req.user.cart)
+router.get('/', authenticateUser, async (req, res) => {
+    try {
+        const cart = await Art.find({_id: req.user.cart}).populate('createdBy.user')
+        return res.status(200).json(cart)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({message: responseList.SOMETHING_WRONG})
+    }
+    
 })
 
 router.post('/', authenticateUser, async (req, res) => {
@@ -41,6 +48,7 @@ router.post('/', authenticateUser, async (req, res) => {
 })
 
 router.delete('/', authenticateUser, async (req, res) => {
+    console.log(req.body)
     if (!req.body || !req.body.artworkId || !mongoose.isObjectIdOrHexString(req.body?.artworkId)) {
         return res.status(400).json({message: responseList.BAD_REQUEST})
     }

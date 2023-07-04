@@ -17,9 +17,11 @@ export function UserProvider({children}) {
     useEffect(() => {
         const tempUser = getUser()
         if (tempUser) {
-            setUser(tempUser)
-            setUserUpdated(false)
+            setUser(tempUser)   
+        } else {
+            setUser(null)  
         }
+        setUserUpdated(false)
     }, [userUpdated])
 
     function storeUser(usr) {
@@ -33,6 +35,7 @@ export function UserProvider({children}) {
     }
 
     function removeUser() {
+        setUserUpdated(true)
         localStorage.removeItem('user')
     }
 
