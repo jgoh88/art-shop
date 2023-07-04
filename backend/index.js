@@ -9,6 +9,7 @@ require('dotenv').config()
 const userController = require('./controllers/user.controller')
 const myartController = require('./controllers/myart.controller')
 const artController = require('./controllers/art.controller')
+const cartController = require('./controllers/cart.controller')
 
 const PORT = process.env.PORT
 const server = express()
@@ -25,5 +26,6 @@ server.use(morgan('dev'))
 // use controllers
 server.use('/', artController)
 server.use('/user', userController)
+server.use('/cart', cartController)
 server.use('/myart', myartController)
 server.listen(PORT, () => console.log(`Running on port ${PORT}`))
