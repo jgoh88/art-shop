@@ -3,7 +3,12 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const responseList = require('../configs/response.config')
 const User = require('../models/user.model')
+const authenticateUser = require('../middlewares/auth.middleware')
 require('dotenv').config()
+
+router.get('/', authenticateUser, (req, res) => {
+    return res.status(200).json({user: req.user})
+})
 
 router.post('/', async (req, res) => {
     if (!req.body || !req.body.username || !req.body.email || !req.body.fullName || !req.body.password || !req.body.contactNo || !req.body.address) {

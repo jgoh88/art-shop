@@ -6,10 +6,6 @@ import SearchIcon from '@mui/icons-material/Search'
 export default function NavBar() {
     const userHook = useUserHook()
 
-    function onLogoutHandler() {
-        alert('Logout function')
-    }
-
     function onSearchSubmitHandler() {
         alert('Search function')
     }
@@ -46,7 +42,7 @@ export default function NavBar() {
                         <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
                         <NavDropdown.Item href="/myart">My Art</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#" onClick={onLogoutHandler}>Log out</NavDropdown.Item>
+                        <NavDropdown.Item href={`/logout/${userHook.user.token}`}>Log out</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="/cart"><ShoppingCartIcon /> <span style={{fontSize: 12}}>0</span></Nav.Link>
                 </>
