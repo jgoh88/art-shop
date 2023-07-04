@@ -3,12 +3,13 @@ import { Container, Row, Col, Card, CloseButton, Button, Modal } from "react-boo
 import { useUserHook } from "../../hooks/useUserHook";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCartHook } from "../../hooks/useCartHook";
 
 export default function Cart() {
-    const [cart, setCart] = useState([])
+    
     const [unavailableCartItems, setUnavailableCartItems] = useState([])
-    const [cartUpdated, setCartUpdated] = useState(false)
     const userHook = useUserHook()
+    const cartHook = useCartHook()
     const navigate = useNavigate()
 
     const [show, setShow] = useState(false);
@@ -17,29 +18,6 @@ export default function Cart() {
         setUnavailableCartItems([])
     };
     const handleShow = () => setShow(true);
-
-    useEffect(() => {
-        const fetchCartData = async () => {
-            if (!userHook.user) {
-                return
-            }
-            try {
-                const res = await axios.get('http://localhost:4000/cart', {
-                    headers: {
-                        authorization: `Bearer ${userHook.user.token}`
-                    }
-                })
-                if (res.status === 200) {
-                    const tempCart = res.data
-                    setCart(tempCart)
-                    setCartUpdated(false)
-                }
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fetchCartData()
-    }, [userHook.user, cartUpdated])
 
     useEffect(() => {
         if (unavailableCartItems.length === 0) {
@@ -57,7 +35,7 @@ export default function Cart() {
                 }
             })
             if (res.status === 200) {
-                setCartUpdated(true)
+                cartHook.setCartUpdated(true)
             }
         } catch (err) {
             console.log(err)
@@ -103,13 +81,13 @@ export default function Cart() {
                 <Col md={2} className="text-end">Price</Col>
             </Row>
             <Row>
-                {cart.length === 0
+                {cartHook.cart.length === 0
                 ? <Card className="mt-5 border-dark text-center">
                     <Card.Body>
                         <p className="fw-medium fs-3">No items in cart</p>
                     </Card.Body>
                 </Card> 
-                : cart.map(cartItem => {
+                : cartHook.cart.map(cartItem => {
                     return (
                         <Card className="mt-3 border-dark" key={cartItem._id}>
                             <Card.Body>
@@ -130,10 +108,10 @@ export default function Cart() {
                     )
                 })}
             </Row>
-            {cart.length === 0 ? ''
+            {cartHook.cart.length === 0 ? ''
             : <Row className="mt-4 text-end">
                 <Col>
-                    <p className="fs-4"><span className="fw-bold">Total</span> RM {cart.reduce((t, c) => t + c.price, 0)}</p>
+                    <p className="fs-4"><span className="fw-bold">Total</span> RM {cartHook.cart.reduce((t, c) => t + c.price, 0)}</p>
                     <Button variant="secondary" className="fw-medium mb-3 fs-5" onClick={onCheckoutClickHandler}>
                         Checkout
                     </Button>
