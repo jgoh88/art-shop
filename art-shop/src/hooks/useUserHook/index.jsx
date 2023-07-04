@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const UserContext = createContext()
 
@@ -23,16 +24,20 @@ export function UserProvider({children}) {
 
     function storeUser(usr) {
         setUserUpdated(true)
-        sessionStorage.setItem('user', JSON.stringify(usr))
+        localStorage.setItem('user', JSON.stringify(usr))
     }
 
     function getUser() {
-        const storageUser = sessionStorage.getItem('user')
+        const storageUser = localStorage.getItem('user')
         return JSON.parse(storageUser)
     }
 
+    function removeUser() {
+        localStorage.removeItem('user')
+    }
+
     return (
-        <UserContext.Provider value={{user, storeUser}}>
+        <UserContext.Provider value={{user, storeUser, removeUser}}>
             {children}
         </UserContext.Provider>
     )
