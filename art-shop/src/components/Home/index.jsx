@@ -1,6 +1,7 @@
 import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
+import DetailedPostModalComponent from "../DetailedPostModal";
 
 export default function Home({onSelectArt, addArtToCart}){
 
@@ -37,6 +38,12 @@ useEffect (()=>{
          <div>{artwork.name}</div>
        </Col>
        <Col>
+       <DetailedPostModalComponent 
+       name={artwork.name}
+       price={artwork.price}
+       description={artwork.description}
+       pic={artwork.img}
+       />
          { artwork.quantity > 0 ? <Button onClick={addArtToCart}>Add to cart</Button>  : <div>No stock</div>}
        </Col>
      </Row>

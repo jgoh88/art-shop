@@ -62,8 +62,8 @@ async function onFormSubmitHandler(e) {
           navigate('/myart')
       }
   } catch (err) {
-      if (err.response.status === 400 && err.response.data.message === 'Username or email is duplicate') {
-          setErrorMessage('Username or email is already taken')
+      if (err.response.status === 400 && err.response.data.message === 'Failed to add new art') {
+          setErrorMessage('Failed to add new art')
       }
   }
 }

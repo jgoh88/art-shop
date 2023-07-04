@@ -1,13 +1,17 @@
 import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
 import UpdateModalComponent from "../UpdateModal";
 import AddModalComponent from "../AddModal";
 
-export default function MyArt({update, remove, add, onSelectArt}){
+export default function MyArt({update, add, onSelectArt}){
 
+const navigate = useNavigate()
+const userHook = useUserHook()
 const [artworks,setArtworks]= useState([]);
+const [errorMessage, setErrorMessage] = useState('')
 
 useEffect (()=>{
  axios.get ('http://localhost:4000/').then (res=>{
@@ -16,6 +20,20 @@ useEffect (()=>{
   })
 },[])
 
+
+async function remove(artwork, e) {
+  try {
+      const res = await axios.delete('http://localhost:4000/myart',artwork._id)
+      if (res.status === 200) {
+          userHook.storeUser(res.data.user)
+          navigate('/myart')
+      }
+  } catch (err) {
+      if (err.response.status === 400 && err.response.data.message === 'Failed to remove') {
+          setErrorMessage('Failed to remove')
+      }
+  }
+}
 
   return (
 <Container>
@@ -46,7 +64,13 @@ useEffect (()=>{
          <div>{artwork.name}</div>
        </Col>
        <Col>
-         <UpdateModalComponent />
+         <UpdateModalComponent 
+         name={artwork.name}
+         price={artwork.price}
+         description={artwork.description}
+         quantity={artwork.quantity}
+         pic={artwork.img}
+         />
          <Row><Button onClick={remove}>Remove</Button></Row>
        </Col>
      </Row>
