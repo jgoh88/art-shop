@@ -1,9 +1,20 @@
 import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React from "react";
+import { useUserHook } from "../../hooks/useUserHook"
 
 <div>Welcome to myArt</div>
 
 export default function MyArt({update, remove, add, onSelectArt, art}){
+
+  const userHook = useUserHook()
+
+//   useEffect(() => {
+//     if (userHook.user) {
+//         navigate('/')
+//     }
+// }, [userHook.user])
+
+//Access email, name, etc
 
   return (
     <Container>
