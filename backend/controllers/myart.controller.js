@@ -17,7 +17,7 @@ router.get("/", authenticateUser, async (req, res) => {
   router.post("/", authenticateUser, async (req, res) => {
     try {
       const artwork = new Art(req.body);
-      artwork.createdBy = req.user.id;
+      artwork.createdBy.user = req.user.id;
       await artwork.save();
       await User.findByIdAndUpdate(req.user.id, { $push: { artworks: artwork._id } });
       res.status(200).json({ message: responseList.CREATED_SUCCESS });
