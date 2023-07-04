@@ -2,6 +2,8 @@ import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 import { useUserHook } from "../../hooks/useUserHook"
+import UpdateModalComponent from "../UpdateModal";
+import AddModalComponent from "../AddModal";
 
 export default function MyArt({update, remove, add, onSelectArt}){
 
@@ -14,6 +16,7 @@ useEffect (()=>{
   })
 },[])
 
+
   return (
 <Container>
 <Row className="mt-3 text-center">
@@ -24,7 +27,7 @@ useEffect (()=>{
 
 <Row className="text-center">
   <Col>
-    <Button onClick={add}>Add New Art</Button>
+  <AddModalComponent />
   </Col>
 </Row>
 
@@ -43,7 +46,7 @@ useEffect (()=>{
          <div>{artwork.name}</div>
        </Col>
        <Col>
-         <Row><Button onClick={update}>Update</Button></Row>
+         <UpdateModalComponent />
          <Row><Button onClick={remove}>Remove</Button></Row>
        </Col>
      </Row>
