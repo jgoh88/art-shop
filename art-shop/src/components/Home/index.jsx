@@ -2,7 +2,7 @@ import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 
-export default function Home({onSelectArt, artwork, addArtToCart}){
+export default function Home({onSelectArt, addArtToCart}){
 
 const [artworks,setArtworks]= useState([]);
 
