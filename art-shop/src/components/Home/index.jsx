@@ -1,11 +1,14 @@
 import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
+import { useUserHook } from "../../hooks/useUserHook";
+import { useCartHook } from "../../hooks/useCartHook";
 import DetailedPostModalComponent from "../DetailedPostModal";
 
-export default function Home({onSelectArt, addArtToCart}){
+export default function Home({onSelectArt}){
 
 const [artworks,setArtworks]= useState([]);
+const cartHook = useCartHook()
 
 useEffect (()=>{
  axios.get ('http://localhost:4000/').then (res=>{
@@ -13,6 +16,7 @@ useEffect (()=>{
     setArtworks (res.data.artwork)
   })
 },[])
+
 
   return (
 
@@ -44,7 +48,7 @@ useEffect (()=>{
        description={artwork.description}
        pic={artwork.img}
        />
-         { artwork.quantity > 0 ? <Button onClick={addArtToCart}>Add to cart</Button>  : <div>No stock</div>}
+         { artwork.quantity > 0 ? <Button onClick={() => cartHook.addArtToCart(artwork._id.toString())}>Add to cart</Button>  : <div>No stock</div>}
        </Col>
      </Row>
    </Card.Body>
@@ -52,7 +56,7 @@ useEffect (()=>{
 </Col> 
 )})}
 </Row>
-  </Container>
+</Container>
 
 
 

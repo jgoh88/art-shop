@@ -1,10 +1,12 @@
 import { Container, Navbar, Nav, NavDropdown, Form, Button } from "react-bootstrap"
 import { useUserHook } from "../../hooks/useUserHook"
+import { useCartHook } from "../../hooks/useCartHook";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import SearchIcon from '@mui/icons-material/Search'
 
 export default function NavBar() {
     const userHook = useUserHook()
+    const cartHook = useCartHook()
 
     function onSearchSubmitHandler() {
         alert('Search function')
@@ -44,7 +46,7 @@ export default function NavBar() {
                         <NavDropdown.Divider />
                         <NavDropdown.Item href={`/logout/${userHook.user.token}`}>Log out</NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link href="/cart"><ShoppingCartIcon /> <span style={{fontSize: 12}}>0</span></Nav.Link>
+                    <Nav.Link href="/cart"><ShoppingCartIcon /> <span style={{fontSize: 12}}>{cartHook.cart.length}</span></Nav.Link>
                 </>
                 }
             </Nav>
