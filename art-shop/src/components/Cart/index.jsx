@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Card, CloseButton, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, CloseButton, Button, Modal } from "react-bootstrap";
 import { useUserHook } from "../../hooks/useUserHook";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,13 @@ export default function Cart() {
     const [cartUpdated, setCartUpdated] = useState(false)
     const userHook = useUserHook()
     const navigate = useNavigate()
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false)
+        setUnavailableCartItems([])
+    };
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         const fetchCartData = async () => {
@@ -33,6 +40,13 @@ export default function Cart() {
         }
         fetchCartData()
     }, [userHook.user, cartUpdated])
+
+    useEffect(() => {
+        if (unavailableCartItems.length === 0) {
+            return
+        }
+        handleShow()
+    }, [unavailableCartItems])
 
     async function onDeleteClickHandler(artworkId) {
         try {
@@ -69,7 +83,7 @@ export default function Cart() {
             }
         } catch (err) {
             if (err.response.status === 400 && err.response.data.message === 'Artwork sold or removed') {
-                console.log(err.response.data)
+                setUnavailableCartItems(err.response.data.unavailableArtwork)
                 return
             }
             console.log(err)
@@ -126,7 +140,40 @@ export default function Cart() {
                 </Col>
             </Row>
             }
-
+            <Modal 
+                size="lg"
+                centered
+                show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Artwork no longer available</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    We are deeply sorry, however it seems the following {'artwork(s)'} are no longer available. Please remove them from the cart before proceeding.
+                    <Container>
+                        {unavailableCartItems.map((cartItem) => {
+                            return (
+                                <Card className="mt-3 border-dark" key={cartItem._id}>
+                                    <Card.Body>
+                                        <Row>
+                                            <Col md={4}>
+                                                <Card.Img src={cartItem.img} />
+                                            </Col>
+                                            <Col md={8}>
+                                                <p><span className="fw-medium">Name:</span><br/>{cartItem.name}</p>
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>                        
+                            )
+                        })}
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Okay
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     )
 }
