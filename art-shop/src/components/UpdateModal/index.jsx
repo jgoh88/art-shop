@@ -56,14 +56,14 @@ async function onFormSubmitHandler(e) {
   e.preventDefault()
   setErrorMessage('')
   try {
-      const res = await axios.post('http://localhost:4000/user', formInput)
+      const res = await axios.put('http://localhost:4000/user', formInput)
       if (res.status === 200) {
           userHook.storeUser(res.data.user)
           navigate('/myart')
       }
   } catch (err) {
-      if (err.response.status === 400 && err.response.data.message === 'Username or email is duplicate') {
-          setErrorMessage('Username or email is already taken')
+      if (err.response.status === 400 && err.response.data.message === 'Failed to update') {
+          setErrorMessage('Failed to update')
       }
   }
 }
@@ -74,7 +74,7 @@ async function onFormSubmitHandler(e) {
           Update
         </Button>
         <Modal isOpen={modal} toggle={toggle} {...props}>
-          <ModalHeader toggle={toggle}>{props.title}</ModalHeader>
+          <ModalHeader toggle={toggle}>{props.name}</ModalHeader>
           <ModalBody>
            <Container>
            <Row className="mt-3 text-center">
@@ -93,16 +93,16 @@ async function onFormSubmitHandler(e) {
                         </div>
                         : ''}
                         <Form.Group className="mb-3" controlId="formName">
-                            <Form.Control type="text" placeholder="Name" name="Name" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder={props.name} name="Name" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formDescription">
-                            <Form.Control type="text" placeholder="Description" name="Description" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder={props.description} name="Description" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formPrice">
-                            <Form.Control type="text" placeholder="Price" name="Price" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder={props.price} name="Price" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formQuantity">
-                            <Form.Control type="text" placeholder="Quantity" name="Quantity" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder={props.quantity} name="Quantity" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <div className="mb-3 d-flex justify-content-start">
                             <div className="me-3">
