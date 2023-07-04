@@ -6,6 +6,8 @@ import Home from "./components/Home";
 import { UserProvider } from './hooks/useUserHook';
 import MyArt from "./components/myArt";
 import Logout from './components/Logout';
+import Cart from './components/Cart';
+import CheckedOut from './components/CheckedOut';
 
 
 
@@ -18,6 +20,8 @@ function App() {
           <Route path={'/signup'} element={<Signup />} />
           <Route path={'/login'} element={<Login />} />
           <Route path={'/logout/:token'} element={<Logout /> } />
+          <Route path={'/cart'} element={<Cart />} />
+          <Route path={'/cart/checkout'} element={<CheckedOut />} />
           <Route path={"/"} element={<Home />} />
           <Route path={"/myart"} element={<MyArt />} />
         </Routes>
