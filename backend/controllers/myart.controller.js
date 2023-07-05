@@ -8,7 +8,7 @@ require('dotenv').config()
 //Display artworks posted in myArt
 router.get("/", authenticateUser, async (req, res) => {
   try{
-    const artwork = await Art.find({ user: req.user.id});
+    const artwork = await Art.find({ "createdBy.user": req.user.id, quantity: {$ne:0}});
       res.status(200).json({ artwork });
     } catch (e) {
       res.status(400).json({ message: responseList.BAD_REQUEST });
@@ -31,7 +31,6 @@ router.get("/", authenticateUser, async (req, res) => {
 
   router.put("/", authenticateUser, async (req, res) => {
     try {
-      console.log(req.body);
       const artwork = req.body.data;
       await Art.findByIdAndUpdate(req.body.id, { $set:artwork });
       res.status(200).json({ message: responseList.CREATED_SUCCESS });
@@ -43,10 +42,11 @@ router.get("/", authenticateUser, async (req, res) => {
 
   router.delete("/", authenticateUser, async (req, res) => {
     try {
-      const artwork = req.body;
-      await vacancyModel.findByIdAndRemove(artwork.id);
+      console.log(req.body);
+      await Art.findByIdAndUpdate(req.body.id, { $set:{quantity:0} });
       res.status(200).json({ message: responseList.DELETED_SUCCESS });
     } catch (e) {
+      console.log(e)
       res.status(400).json({ message: responseList.DELETED_FAILED });
     }
   });
