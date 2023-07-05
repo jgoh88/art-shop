@@ -9,7 +9,7 @@ import MyArt from "./components/myArt";
 import Logout from './components/Logout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
-
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -32,6 +32,7 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path={"/"} element={<Home />} />
+            <Route path={"/profile"} element={<Profile />} />
             <Route path={"/myart"} element={
               <ProtectedRoute>
                 <MyArt />

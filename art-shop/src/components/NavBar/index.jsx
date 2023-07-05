@@ -43,6 +43,7 @@ export default function NavBar() {
                     <NavDropdown title={`Logged in as ${userHook.user.fullName}`}>
                         <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
                         <NavDropdown.Item href="/myart">My Art</NavDropdown.Item>
+                        <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href={`/logout/${userHook.user.token}`}>Log out</NavDropdown.Item>
                     </NavDropdown>
