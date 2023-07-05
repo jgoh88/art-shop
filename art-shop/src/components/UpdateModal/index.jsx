@@ -36,7 +36,7 @@ const navigate = useNavigate()
         uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET,
     }, (err, result) => {
         if (result.event === 'success') {
-            setFormInput((prevState) => ({...prevState, profilePic: result.info.secure_url,}))
+            setFormInput((prevState) => ({...prevState, img: result.info.secure_url,}))
         }   
     })
 }, [])
