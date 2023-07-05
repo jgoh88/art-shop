@@ -9,7 +9,7 @@ import MyArt from "./components/myArt";
 import Logout from './components/Logout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
-
+import Profile from './components/Profile';
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
             <Route path={'/cart/checkout'} element={<CheckedOut />} />
             <Route path={"/"} element={<Home />} />
             <Route path={"/myart"} element={<MyArt />} />
+            <Route path={"/profile"} element={<Profile />} />
           </Routes>
         </CartProvider>
       </UserProvider>
