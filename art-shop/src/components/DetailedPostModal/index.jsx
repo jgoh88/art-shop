@@ -14,25 +14,25 @@ function DetailedPostModalComponent (props) {
           Details
         </Button>
         <Modal isOpen={modal} toggle={toggle} {...props}>
-          <ModalHeader toggle={toggle}><h1>Details</h1></ModalHeader>
+          <ModalHeader toggle={toggle}>Details</ModalHeader>
           <ModalBody>
            <Container>
-           <Row className="mt-3 text-center">
+           <Row className="mb-2 text-center fw-medium">
                 <Col>
                 {props.name}
                 </Col>
             </Row>
             <Row>
- <Col>
-   <Card.Img variant="top" src={props.img || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
-       <Col>
-         <div>
-           <div className={`fw-bold`}>RM {props.price}</div>
-         </div>
-         <div>{props.description}</div>
-       </Col>
-       </Col>
-</Row>
+              <Col>
+                <Card.Img variant="top" src={props.img || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
+                    <Col>
+                      <div>
+                        <div className={`fw-bold`}>RM {props.price}</div>
+                      </div>
+                      <div>{props.name}</div>
+                    </Col>
+                </Col>
+            </Row>
             </Container>
           </ModalBody>
           <ModalFooter>
