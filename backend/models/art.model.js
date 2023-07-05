@@ -20,7 +20,7 @@ const artSchema = new Schema({
     },
     img: {
         type: String,
-        required: true,
+        required: false,
     },
     deleted: Boolean,
     createdBy: {
