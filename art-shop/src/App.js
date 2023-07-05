@@ -49,10 +49,9 @@ function App() {
 
 function ProtectedRoute({children}) {
   const userHook = useUserHook()
-  // Commenting out the code for now to ease development and testing, to uncomment later
-  // if(!userHook.getUser()) {
-  //   return <Navigate to='/login' replace />
-  // }
+  if(!userHook.getUser()) {
+    return <Navigate to='/login' replace />
+  }
   return children
 }
 
