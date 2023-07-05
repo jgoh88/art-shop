@@ -9,6 +9,7 @@ import MyArt from "./components/myArt";
 import Logout from './components/Logout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
+import Search from './components/Search';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path={"/"} element={<Home />} />
+            <Route path={"/search"} element={<Search />} />
             <Route path={"/myart"} element={
               <ProtectedRoute>
                 <MyArt />

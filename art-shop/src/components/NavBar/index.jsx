@@ -3,13 +3,16 @@ import { useUserHook } from "../../hooks/useUserHook"
 import { useCartHook } from "../../hooks/useCartHook";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import SearchIcon from '@mui/icons-material/Search'
+import { useState } from "react";
 
 export default function NavBar() {
     const userHook = useUserHook()
     const cartHook = useCartHook()
+    const [searchInput, setSearchInput] = useState('')
 
-    function onSearchSubmitHandler() {
-        alert('Search function')
+    function onSearchSubmitHandler(e) {
+        e.preventDefault()
+        
     }
 
     return (
@@ -30,6 +33,7 @@ export default function NavBar() {
                         placeholder="Search"
                         className="me-2"
                         aria-label="Search"
+                        onChange={(e) => setSearchInput(e.target.value)}
                         />
                         <Button variant="dark" className="d-flex align-items-center ps-0" type="submit"><SearchIcon /></Button>
                     </Form>
