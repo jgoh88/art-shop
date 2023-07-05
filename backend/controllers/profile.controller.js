@@ -7,8 +7,8 @@ require('dotenv').config()
 //Display artworks posted in myArt
 router.get("/", authenticateUser, async (req, res) => {
   try{
-    const userInfo = await User.find({ "user._id": req.user.id});
-      res.status(200).json({ userInfo });
+    const userinfo = await User.find({ "_id": req.user.id});
+      res.status(200).json({ userinfo });
     } catch (e) {
       res.status(400).json({ message: responseList.BAD_REQUEST });
     }
