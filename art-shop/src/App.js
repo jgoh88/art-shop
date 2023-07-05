@@ -10,7 +10,7 @@ import Logout from './components/Logout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
 import Search from './components/Search';
-
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
             } />
             <Route path={"/"} element={<Home />} />
             <Route path={"/search"} element={<Search />} />
+            <Route path={"/profile"} element={<Profile />} />
             <Route path={"/myart"} element={
               <ProtectedRoute>
                 <MyArt />
