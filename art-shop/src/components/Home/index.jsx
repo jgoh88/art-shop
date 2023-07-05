@@ -1,7 +1,6 @@
 import {Col, Row, Card, Button, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
-import { useUserHook } from "../../hooks/useUserHook";
 import { useCartHook } from "../../hooks/useCartHook";
 import DetailedPostModalComponent from "../DetailedPostModal";
 

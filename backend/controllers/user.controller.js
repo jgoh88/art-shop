@@ -6,8 +6,24 @@ const User = require('../models/user.model')
 const authenticateUser = require('../middlewares/auth.middleware')
 require('dotenv').config()
 
-router.get('/', authenticateUser, (req, res) => {
-    return res.status(200).json({user: req.user})
+router.get('/', (req, res) => {
+    const bearerToken = req.headers?.authorization
+    if (!bearerToken) {
+        return res.status(401).json({message: responseList.MISSING_TOKEN})
+    }
+    const token = bearerToken.split(' ')[1]
+    if (!token) {
+        return res.status(401).json({message: responseList.MISSING_TOKEN})
+    }
+    try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        return res.status(200).json({message: responseList.VALID_TOKEN, user: decodedToken.user})
+    } catch (err) {
+        if(err instanceof jwt.TokenExpiredError){
+            return res.status(401).json({message: responseList.INVALID_TOKEN})
+        }
+        return res.status(500).json({message: responseList.SOMETHING_WRONG})
+    }  
 })
 
 router.post('/', async (req, res) => {
