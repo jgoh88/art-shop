@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
 import UpdateModalComponent from "../UpdateModal";
 import AddModalComponent from "../AddModal";
+import RemoveModalComponent from "../RemoveModal";
 
 export default function MyArt({update, add, onSelectArt}){
 
@@ -15,33 +16,19 @@ const [errorMessage, setErrorMessage] = useState('')
 const [updated,setUpdated]= useState(false);
 
 useEffect (()=>{
- axios.get ('http://localhost:4000/').then (res=>{
+  if (userHook.user === null) {return }
+ axios.get ('http://localhost:4000/myart', {
+  headers: {
+      authorization: `Bearer ${userHook.user.token}`
+  }
+}
+).then (res=>{
     console.log (res.data)
     setArtworks (res.data.artwork)
   })
   setUpdated(false)
-},[updated])
+},[updated,userHook.user])
 
-
-async function remove(artwork, e) {
-  try {
-    console.log(artwork._id)
-      const res = await axios.delete('http://localhost:4000/myart',artwork._id,
-      {
-        headers: {
-            authorization: `Bearer ${userHook.user.token}`
-        }
-    }
-      )
-      if (res.status === 200) {
-          navigate('/myart')
-      }
-  } catch (err) {
-      if (err.response.status === 400 && err.response.data.message === 'Failed to remove') {
-          setErrorMessage('Failed to remove')
-      }
-  }
-}
 
   return (
 <Container>
@@ -83,7 +70,10 @@ async function remove(artwork, e) {
          setupdated={setUpdated}
          id={artwork._id}
          />
-         <Row><Button onClick={remove}>Remove</Button></Row>
+        <RemoveModalComponent 
+        id={artwork._id}
+        setupdated={setUpdated}
+        />
        </Col>
      </Row>
    </Card.Body>
