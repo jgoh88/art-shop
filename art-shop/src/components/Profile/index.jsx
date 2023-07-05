@@ -2,7 +2,7 @@ import {Col, Row, Card, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 import { useUserHook } from "../../hooks/useUserHook"
-import UpdateModalComponent from "../UpdateModal";
+import EditProfileComponent from "../EditProfile";
 
 export default function Profile({update, add, onSelectArt}){
 
@@ -37,10 +37,11 @@ useEffect (()=>{
 {userInfos.map((prof) => {
  return(
  <Card>
-   <Card.Img variant="top" src={prof.profilePic || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
+  <Card.Img variant="top" className = 'center' height='200px' width='200px' src={prof.profilePic || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
    <Card.Body>
+    <Col>
      <Row>
-       <Col>
+       <Col className = 'mt-3 justify-content-center'>
          <div>Username: {prof.username}</div>
          <div>Full Name: {prof.fullName}</div>
          <div>Email: {prof.email}</div>
@@ -48,17 +49,19 @@ useEffect (()=>{
          <div>Address: {prof.address}</div>
        </Col>
        <Col>
-         {/* <UpdateModalComponent 
-         name={artwork.name}
-         price={artwork.price}
-         description={artwork.description}
-         quantity={artwork.quantity}
-         pic={artwork.img}
+         <EditProfileComponent 
+         username={prof.username}
+         fullName={prof.fullName}
+         email={prof.email}
+         contactNo={prof.contactNo}
+         address={prof.address}
+         pic={prof.profilePic}
          setupdated={setUpdated}
-         id={artwork._id}
-         /> */}
+         id={prof._id}
+         />
        </Col>
      </Row>
+     </Col>
    </Card.Body>
  </Card>
 )})}
