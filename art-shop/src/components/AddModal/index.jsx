@@ -56,12 +56,18 @@ async function onFormSubmitHandler(e) {
   e.preventDefault()
   setErrorMessage('')
   try {
-      const res = await axios.post('http://localhost:4000/user', formInput)
+      const res = await axios.post('http://localhost:4000/myart', formInput, {
+        headers: {
+            authorization: `Bearer ${userHook.user.token}`
+        }
+    } )
       if (res.status === 200) {
-          userHook.storeUser(res.data.user)
           navigate('/myart')
+          props.setupdated (true)
+          toggle()
       }
   } catch (err) {
+    console.log(err);
       if (err.response.status === 400 && err.response.data.message === 'Failed to add new art') {
           setErrorMessage('Failed to add new art')
       }
@@ -94,16 +100,16 @@ async function onFormSubmitHandler(e) {
                         </div>
                         : ''}
                         <Form.Group className="mb-3" controlId="formName">
-                            <Form.Control type="text" placeholder="Name" name="Name" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder="Name" name="name" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formDescription">
-                            <Form.Control type="text" placeholder="Description" name="Description" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder="Description" name="description" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formPrice">
-                            <Form.Control type="text" placeholder="Price" name="Price" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder="Price" name="price" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formQuantity">
-                            <Form.Control type="text" placeholder="Quantity" name="Quantity" required onChange={onFormChangeHandler}/>
+                            <Form.Control type="text" placeholder="Quantity" name="quantity" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <div className="mb-3 d-flex justify-content-start">
                             <div className="me-3">

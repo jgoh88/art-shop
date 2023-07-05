@@ -12,20 +12,28 @@ const navigate = useNavigate()
 const userHook = useUserHook()
 const [artworks,setArtworks]= useState([]);
 const [errorMessage, setErrorMessage] = useState('')
+const [updated,setUpdated]= useState(false);
 
 useEffect (()=>{
  axios.get ('http://localhost:4000/').then (res=>{
     console.log (res.data)
     setArtworks (res.data.artwork)
   })
-},[])
+  setUpdated(false)
+},[updated])
 
 
 async function remove(artwork, e) {
   try {
-      const res = await axios.delete('http://localhost:4000/myart',artwork._id)
+    console.log(artwork._id)
+      const res = await axios.delete('http://localhost:4000/myart',artwork._id,
+      {
+        headers: {
+            authorization: `Bearer ${userHook.user.token}`
+        }
+    }
+      )
       if (res.status === 200) {
-          userHook.storeUser(res.data.user)
           navigate('/myart')
       }
   } catch (err) {
@@ -45,7 +53,9 @@ async function remove(artwork, e) {
 
 <Row className="text-center">
   <Col>
-  <AddModalComponent />
+  <AddModalComponent
+     setupdated={setUpdated}
+  />
   </Col>
 </Row>
 
@@ -70,6 +80,8 @@ async function remove(artwork, e) {
          description={artwork.description}
          quantity={artwork.quantity}
          pic={artwork.img}
+         setupdated={setUpdated}
+         id={artwork._id}
          />
          <Row><Button onClick={remove}>Remove</Button></Row>
        </Col>
