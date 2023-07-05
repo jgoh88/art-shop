@@ -15,13 +15,32 @@ export function UserProvider({children}) {
     const [userUpdated, setUserUpdated] = useState(false)
 
     useEffect(() => {
-        const tempUser = getUser()
-        if (tempUser) {
-            setUser(tempUser)   
-        } else {
-            setUser(null)  
+        const verifyUser = async () => {
+            const tempUser = getUser()
+            if (!tempUser) {
+                setUser(null) 
+                setUserUpdated(false)
+                return
+            }
+            try {
+                await axios.get('http://localhost:4000/user', {
+                    headers: {
+                        authorization: `Bearer ${tempUser.token}`
+                    }
+                })
+                setUser(tempUser)   
+                setUserUpdated(false)
+            } catch (err) {
+                setUserUpdated(false)
+                console.log(err)
+                if (err.response.status === 400 && err.response.data.message === 'Invalid token') {
+                    removeUser()
+                    return
+                }
+                console.log(err)
+            }
         }
-        setUserUpdated(false)
+        verifyUser()
     }, [userUpdated])
 
     function storeUser(usr) {
@@ -40,7 +59,7 @@ export function UserProvider({children}) {
     }
 
     return (
-        <UserContext.Provider value={{user, storeUser, removeUser}}>
+        <UserContext.Provider value={{user, storeUser, removeUser, getUser}}>
             {children}
         </UserContext.Provider>
     )
