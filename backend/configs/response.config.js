@@ -9,6 +9,7 @@ const responseList = {
     DUPLICATE_USERNAME_EMAIL: "Username or email is duplicate",
     MISSING_USERNAME_PASSWORD: "Missing username or password in body",
     MISSING_TOKEN: "Missing token in header",
+    VALID_TOKEN: "Token is valid",
     INVALID_TOKEN: "Invalid token",
     SOMETHING_WRONG: "Something went wrong",
     NO_STOCK: "Artwork sold or removed",
