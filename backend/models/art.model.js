@@ -22,7 +22,10 @@ const artSchema = new Schema({
         type: String,
         required: false,
     },
-    deleted: Boolean,
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
     createdBy: {
         user: {
             type: mongoose.ObjectId,

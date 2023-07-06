@@ -5,12 +5,12 @@ import Login from './components/Login';
 import Home from "./components/Home";
 import { UserProvider, useUserHook } from './hooks/useUserHook';
 import { CartProvider } from './hooks/useCartHook';
-import MyArt from "./components/myArt";
 import Logout from './components/Logout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
 import Search from './components/Search';
 import Profile from './components/Profile';
+import MyArt from './components/MyArt';
 
 function App() {
   return (

@@ -22,6 +22,9 @@ router.get('/', (req, res) => {
         if(err instanceof jwt.TokenExpiredError){
             return res.status(401).json({message: responseList.INVALID_TOKEN})
         }
+        if(err instanceof jwt.JsonWebTokenError){
+            return res.status(401).json({message: responseList.INVALID_TOKEN})
+        }
         return res.status(500).json({message: responseList.SOMETHING_WRONG})
     }  
 })

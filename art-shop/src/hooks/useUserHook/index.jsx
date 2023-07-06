@@ -33,14 +33,10 @@ export function UserProvider({children}) {
             } catch (err) {
                 setUserUpdated(false)
                 console.log(err)
-                if (err.response.status === 400 && err.response.data.message === 'Invalid token') {
+                if (err.response.status === 401 && err.response.data.message === 'Invalid token') {
                     removeUser()
                     return
                 } 
-                if (err.response.status === 500 && err.response.data.message === 'Something went wrong') {
-                    removeUser()
-                    return
-                }
                 console.log(err)
             }
         }
