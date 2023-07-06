@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import {Col, Row, Container} from "react-bootstrap";
-import axios from "axios"
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import Artworks from "../Artworks";
 
 export default function Search() {
@@ -16,7 +16,7 @@ export default function Search() {
             return
         }
         setSearchTerm(searchInput)
-        axios.get (`http://localhost:4000/search/${searchInput}`).then (res=>{
+        artShopBackendAxios.get (`/search/${searchInput}`).then (res=>{
             setArtworks (res.data.artwork)
         })
         navigate(location.pathname, {})

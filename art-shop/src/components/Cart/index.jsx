@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, CloseButton, Button, Modal } from "react-bootstrap";
 import { useUserHook } from "../../hooks/useUserHook";
-import axios from "axios";
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { useNavigate } from "react-router-dom";
 import { useCartHook } from "../../hooks/useCartHook";
 
@@ -28,7 +28,7 @@ export default function Cart() {
 
     async function onDeleteClickHandler(artworkId) {
         try {
-            const res = await axios.delete('http://localhost:4000/cart', {
+            const res = await artShopBackendAxios.delete('/cart', {
                 data: {artworkId: artworkId},
                 headers: {
                     authorization: `Bearer ${userHook.user.token}`
@@ -44,18 +44,19 @@ export default function Cart() {
 
     async function onCheckoutClickHandler() {
         try {
-            const res = await axios.get('http://localhost:4000/cart/checkout', {
+            const res = await artShopBackendAxios.get('/cart/checkout', {
                 headers: {
                     authorization: `Bearer ${userHook.user.token}`
                 }
             })
             if (res.status === 200) {
-                const res = await axios.post('http://localhost:4000/cart/checkout', {}, {
+                const res = await artShopBackendAxios.post('/cart/checkout', {}, {
                     headers: {
                         authorization: `Bearer ${userHook.user.token}`
                     }
                 })
                 if (res.status === 200) {
+                    cartHook.setCartUpdated(true)
                     navigate('/cart/checkout')
                 }
             }

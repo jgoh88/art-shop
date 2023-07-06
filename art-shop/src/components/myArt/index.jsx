@@ -1,7 +1,6 @@
-import {Col, Row, Card, Button, Container} from "react-bootstrap";
+import {Col, Row, Card, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { useUserHook } from "../../hooks/useUserHook"
 import UpdateModalComponent from "../UpdateModal";
 import AddModalComponent from "../AddModal";
@@ -9,15 +8,13 @@ import RemoveModalComponent from "../RemoveModal";
 
 export default function MyArt({update, add, onSelectArt}){
 
-const navigate = useNavigate()
 const userHook = useUserHook()
 const [artworks,setArtworks]= useState([]);
-const [errorMessage, setErrorMessage] = useState('')
 const [updated,setUpdated]= useState(false);
 
 useEffect (()=>{
   if (userHook.user === null) {return }
- axios.get ('http://localhost:4000/myart', {
+  artShopBackendAxios.get('/myart', {
   headers: {
       authorization: `Bearer ${userHook.user.token}`
   }
