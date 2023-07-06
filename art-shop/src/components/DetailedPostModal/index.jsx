@@ -29,7 +29,7 @@ function DetailedPostModalComponent (props) {
                       <div>
                         <div className={`fw-bold`}>RM {props.price}</div>
                       </div>
-                      <div>{props.name}</div>
+                      <div>{props.description}</div>
                     </Col>
                 </Col>
             </Row>
