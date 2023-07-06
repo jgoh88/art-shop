@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { Form, Container, Row, Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
@@ -25,7 +25,7 @@ async function remove(e) {
   e.preventDefault()
   setErrorMessage('')
   try {
-      const res = await axios.delete('http://localhost:4000/myart', {
+      const res = await artShopBackendAxios.delete('/myart', {
         data: {id: props.id},
         headers: {
             authorization: `Bearer ${userHook.user.token}`

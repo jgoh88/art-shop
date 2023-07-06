@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { Form, Container, Row, Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
@@ -56,7 +56,7 @@ async function onFormSubmitHandler(e) {
   e.preventDefault()
   setErrorMessage('')
   try {
-      const res = await axios.post('http://localhost:4000/myart', formInput, {
+      const res = await artShopBackendAxios.post('/myart', formInput, {
         headers: {
             authorization: `Bearer ${userHook.user.token}`
         }

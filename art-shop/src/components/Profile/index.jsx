@@ -1,6 +1,6 @@
 import {Col, Row, Card, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { useUserHook } from "../../hooks/useUserHook"
 import EditProfileComponent from "../EditProfile";
 
@@ -12,7 +12,7 @@ const [updated,setUpdated]= useState(false);
 
 useEffect (()=>{
   if (userHook.user === null) {return }
- axios.get ('http://localhost:4000/profile', {
+ artShopBackendAxios.get ('/profile', {
   headers: {
       authorization: `Bearer ${userHook.user.token}`
   }

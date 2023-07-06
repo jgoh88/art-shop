@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 
 const UserContext = createContext()
 
@@ -23,7 +23,7 @@ export function UserProvider({children}) {
                 return
             }
             try {
-                await axios.get('http://localhost:4000/user', {
+                await artShopBackendAxios.get('/user', {
                     headers: {
                         authorization: `Bearer ${tempUser.token}`
                     }
@@ -34,6 +34,10 @@ export function UserProvider({children}) {
                 setUserUpdated(false)
                 console.log(err)
                 if (err.response.status === 400 && err.response.data.message === 'Invalid token') {
+                    removeUser()
+                    return
+                } 
+                if (err.response.status === 500 && err.response.data.message === 'Something went wrong') {
                     removeUser()
                     return
                 }

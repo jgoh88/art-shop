@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useUserHook } from "../../hooks/useUserHook";
-import axios from "axios";
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { Toast } from "react-bootstrap";
 
 const CartContext = createContext()
@@ -27,7 +27,7 @@ export function CartProvider({children}) {
                 return
             }
             try {
-                const res = await axios.get('http://localhost:4000/cart', {
+                const res = await artShopBackendAxios.get('/cart', {
                     headers: {
                         authorization: `Bearer ${userHook.user.token}`
                     }
@@ -57,7 +57,7 @@ export function CartProvider({children}) {
 
     async function addArtToCart(artworkId) {
         try {
-          await axios.post('http://localhost:4000/cart', {artworkId: artworkId} ,{
+          await artShopBackendAxios.post('/cart', {artworkId: artworkId} ,{
             headers: {
                 authorization: `Bearer ${userHook.user.token}`
             }
