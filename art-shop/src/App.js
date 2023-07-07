@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
 import Search from './components/Search';
 import Profile from './components/Profile';
+import About from './components/About';
 import MyArt from './components/MyArt';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path={'/signup'} element={<Signup />} />
             <Route path={'/login'} element={<Login />} />
             <Route path={'/logout/:token'} element={<Logout /> } />
+            <Route path={'/about'} element={<About />} />
             <Route path={'/cart'} element={
               <ProtectedRoute>
                 <Cart />
