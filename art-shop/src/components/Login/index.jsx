@@ -35,7 +35,7 @@ export default function Login() {
             }
         } catch (err) {
             if (err.response.status === 400 && err.response.data.message === 'User and/or password is incorrect!') {
-                setErrorMessage('User and/or password is incorrect!')
+                setErrorMessage('Username and/or password is incorrect!')
             }
         }
     }

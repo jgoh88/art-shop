@@ -1,5 +1,5 @@
 import {Col, Row, Card, Button } from "react-bootstrap";
-import DetailedPostModalComponent from "../DetailedPostModal";
+import ArtworksDetailsModal from "../ArtworksDetailsModal";
 import { useCartHook } from "../../hooks/useCartHook";
 import { useUserHook } from "../../hooks/useUserHook";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -24,13 +24,8 @@ export default function Artworks({ artworks }) {
                             <div>{artwork.name}</div>
                         </Col>
                         <Col>
-                        <DetailedPostModalComponent 
-                        name={artwork.name}
-                        price={artwork.price}
-                        description={artwork.description}
-                        img={artwork.img}
-                        />
-                            { artwork.quantity > 0 
+                            <ArtworksDetailsModal artwork={artwork} />
+                            {artwork.quantity > 0 
                             ? !userHook.user 
                                 ? ''
                                 : <Button onClick={() => cartHook.addArtToCart(artwork._id.toString())}>Add to cart</Button>  
