@@ -1,14 +1,14 @@
 import {Col, Row, Container} from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import Artworks from "../Artworks";
 
-export default function Home({onSelectArt}){
+export default function Home(){
 
   const [artworks,setArtworks]= useState([]);
 
   useEffect (()=>{
-  axios.get ('http://localhost:4000/').then (res=>{
+    artShopBackendAxios.get('/').then (res=>{
       setArtworks (res.data.artwork)
     })
   }, [])

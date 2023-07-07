@@ -5,7 +5,7 @@ const responseList = require('../configs/response.config');
 //Display artworks posted in Home
 router.get("/", async (req, res) => {
   try{
-    const artwork = await Art.find();
+      const artwork = await Art.find({deleted: false});
       res.status(200).json({ artwork });
     } catch (e) {
       console.log(e)
@@ -17,6 +17,7 @@ router.get('/search/:searchTerm', async (req, res) => {
   const searchTerm = req.params.searchTerm
   try {
     const artwork = await Art.find({
+      deleted: false,
       $or: [
         {name: {
           $regex: searchTerm, $options: 'i'

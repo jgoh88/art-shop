@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
+import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import { useNavigate, Link } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
@@ -28,14 +28,14 @@ export default function Login() {
         e.preventDefault()
         setErrorMessage('')
         try {
-            const res = await axios.post('http://localhost:4000/user/login', formInput)
+            const res = await artShopBackendAxios.post('/user/login', formInput)
             if (res.status === 200) {
                 userHook.storeUser(res.data.user)
                 navigate('/')
             }
         } catch (err) {
             if (err.response.status === 400 && err.response.data.message === 'User and/or password is incorrect!') {
-                setErrorMessage('User and/or password is incorrect!')
+                setErrorMessage('Username and/or password is incorrect!')
             }
         }
     }
