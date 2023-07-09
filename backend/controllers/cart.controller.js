@@ -72,12 +72,10 @@ router.get('/checkout', authenticateUser, async (req, res) => {
         return res.status(400).json({message: responseList.BAD_REQUEST})
     }
     try {
-        const artworks = await Art.find({_id: {$in: req.user.cart}})
-        const isAllAvailable = artworks.every(artwork => artwork.quantity > 0) 
-        if (isAllAvailable) {
+        const unavailableArtwork = await Art.find({_id: {$in: req.user.cart}, $or: [{quantity: 0}, {deleted: true}]})
+        if (unavailableArtwork.length === 0) {
             return res.status(200).json({message: responseList.SUCCESS})
         }
-        const unavailableArtwork = artworks.filter(artwork => artwork.quantity === 0)
         return res.status(400).json({message: responseList.NO_STOCK, unavailableArtwork})
     } catch (err) {
         console.log(err)

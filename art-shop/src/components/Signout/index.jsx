@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserHook } from "../../hooks/useUserHook";
 import { Col, Container, Row } from "react-bootstrap";
 
-export default function Logout() {
+export default function Signout() {
     const navigate = useNavigate()
     const [loggedOut, setLoggedOut] = useState(false)
     const userHook = useUserHook()
@@ -21,12 +21,12 @@ export default function Logout() {
             : <Container>
                 <Row className="mt-3 text-center">
                     <Col>
-                        <h1>Logout from account</h1>
+                        <h1>Sign out from account</h1>
                     </Col>
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col>
-                        <p>You have successfully logged out.</p>
+                        <p>You have successfully signed out.</p>
                         <p>Thank you and see you again!</p>
                         <p className="mt-5">You'll be redirected to Home page</p>
                     </Col>

@@ -45,8 +45,8 @@ export default function NavBar() {
                 </div>
                 {!userHook.user 
                 ? <>
+                    <Nav.Link href="/signin">Sign in</Nav.Link>
                     <Nav.Link href="/signup">Sign up</Nav.Link>
-                    <Nav.Link href="/login">Log in</Nav.Link>
                 </>
                 : <>
                     <NavDropdown title={`Logged in as ${userHook.user.fullName}`}>
@@ -54,7 +54,7 @@ export default function NavBar() {
                         <NavDropdown.Item href="/myart">My art</NavDropdown.Item>
                         <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href={`/logout/${userHook.user.token}`}>Log out</NavDropdown.Item>
+                        <NavDropdown.Item href={`/signout/${userHook.user.token}`}>Sign out</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="/cart"><ShoppingCartIcon /> <span style={{fontSize: 12}}>{cartHook.cart.length}</span></Nav.Link>
                 </>

@@ -122,7 +122,7 @@ export default function Signup() {
                         <Button variant="primary" type="submit" className="fw-medium mb-3">
                             Sign up
                         </Button>
-                        <p>Already have an account? <Link to={'/login'}>Log in</Link></p>
+                        <p>Already have an account? <Link to={'/signin'}>Sign in</Link></p>
                     </Form>
                 </Col>
             </Row>
