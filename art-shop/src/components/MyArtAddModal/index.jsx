@@ -40,6 +40,10 @@ export default function MyArtAddModal({setArtworkUpdated}) {
     async function onFormSubmitHandler(e) {
         e.preventDefault()
         setErrorMessage('')
+        if (formInput.img === '') {
+            setErrorMessage('Artwork image is required')
+            return
+        }
         try {
             const res = await artShopBackendAxios.post('/myart', formInput, {
                 headers: {
@@ -54,7 +58,7 @@ export default function MyArtAddModal({setArtworkUpdated}) {
         } catch (err) {
             console.log(err);
             if (err.response.status === 400 && err.response.data.message === 'Failed to add new art') {
-                setErrorMessage('Failed to add new art')
+                setErrorMessage('Failed to add new artwork')
             }
         }
     }

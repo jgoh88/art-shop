@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
-export default function Login() {
+export default function Signin() {
     const navigate = useNavigate()
     const userHook = useUserHook()
     const [errorMessage, setErrorMessage] = useState('')
@@ -44,7 +44,7 @@ export default function Login() {
         <Container>
             <Row className="mt-3 text-center">
                 <Col>
-                    <h1>Login to account</h1>
+                    <h1>Sign in to account</h1>
                 </Col>
             </Row>
             <Row className="mt-3 justify-content-center">
@@ -67,7 +67,7 @@ export default function Login() {
                             <Form.Control type="password" placeholder="Password" name="password" required onChange={onFormChangeHandler}/>
                         </Form.Group>
                         <Button variant="primary" type="submit" className="fw-medium mb-3">
-                            Log in
+                            Sign in
                         </Button>
                         <p>Don't have an account? <Link to={'/signup'}>Sign up</Link></p>
                     </Form>

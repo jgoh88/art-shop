@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
-import Login from './components/Login';
+import Signin from './components/Signin';
 import Home from "./components/Home";
 import { UserProvider, useUserHook } from './hooks/useUserHook';
 import { CartProvider } from './hooks/useCartHook';
-import Logout from './components/Logout';
+import Signout from './components/Signout';
 import Cart from './components/Cart';
 import CheckedOut from './components/CheckedOut';
 import Search from './components/Search';
@@ -21,8 +21,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route path={'/signup'} element={<Signup />} />
-            <Route path={'/login'} element={<Login />} />
-            <Route path={'/logout/:token'} element={<Logout /> } />
+            <Route path={'/signin'} element={<Signin />} />
+            <Route path={'/signout/:token'} element={<Signout /> } />
             <Route path={'/about'} element={<About />} />
             <Route path={'/cart'} element={
               <ProtectedRoute>
@@ -52,7 +52,7 @@ function App() {
 function ProtectedRoute({children}) {
   const userHook = useUserHook()
   if(!userHook.getUser()) {
-    return <Navigate to='/login' replace />
+    return <Navigate to='/signin' replace />
   }
   return children
 }
