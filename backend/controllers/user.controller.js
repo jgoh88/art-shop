@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     } catch (err) {
         console.log(err)
         if (err.name === 'MongoServerError' && err.code === 11000) {
-            return res.status(400).json({message: responseList.DUPLICATE_USERNAME_EMAIL})
+            return res.status(400).json({message: responseList.DUPLICATE_USERNAME_EMAIL, fields: err.keyPattern})
         }
         return res.status(500).json({message: responseList.SOMETHING_WRONG})
     }
