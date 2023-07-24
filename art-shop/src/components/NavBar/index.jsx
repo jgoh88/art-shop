@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function NavBar() {
     const userHook = useUserHook()
     const cartHook = useCartHook()
