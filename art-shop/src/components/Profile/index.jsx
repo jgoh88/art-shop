@@ -4,10 +4,10 @@ import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { useUserHook } from "../../hooks/useUserHook"
 import EditProfileComponent from "../EditProfile";
 
-export default function Profile({update, add, onSelectArt}){
+export default function Profile(){
 
   const userHook = useUserHook()
-  const [userInfo, setUserInfo]= useState([]);
+  const [userInfo, setUserInfo]= useState(null);
   const [updated, setUpdated]= useState(false);
 
   useEffect (()=>{
@@ -19,7 +19,7 @@ export default function Profile({update, add, onSelectArt}){
     })
       .then (res => setUserInfo(res.data.userinfo))
     setUpdated(false)
-  },[updated,userHook.user])
+  },[updated, userHook.user])
 
   return (
     <Container>
@@ -31,21 +31,21 @@ export default function Profile({update, add, onSelectArt}){
       <Row>
         <Col>
           <Card>
-            <Card.Img variant="top" className = 'center mt-3' height='200px' width='200px' src={userInfo.profilePic || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
+            <Card.Img variant="top" className = 'center mt-3' height='200px' width='200px' src={userInfo?.profilePic || "https://www.thesprucepets.com/thmb/j86Zss9kZEIXa54FcOQaR7eCmfY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ricky-kharawala-adK3Vu70DEQ-unsplash-0fd4bcb628bd49c88d8a023130132a7f.jpg"} />
             <Card.Body>
               <Col>
                 <Row>
                   <Col className = 'mt-3 justify-content-center'>
-                    <div>Username: {userInfo.username}</div>
-                    <div>Full Name: {userInfo.fullName}</div>
-                    <div>Email: {userInfo.email}</div>
-                    <div>Contact Number: {userInfo.contactNo}</div>
-                    <div>Address: {userInfo.address}</div>
+                    <div>Username: {userInfo?.username}</div>
+                    <div>Full Name: {userInfo?.fullName}</div>
+                    <div>Email: {userInfo?.email}</div>
+                    <div>Contact Number: {userInfo?.contactNo}</div>
+                    <div>Address: {userInfo?.address}</div>
                   </Col>
                 </Row>
                 <Row className="mt-3">
                   <Col>
-                      <EditProfileComponent 
+                    {userInfo && <EditProfileComponent 
                         username={userInfo.username}
                         fullName={userInfo.fullName}
                         email={userInfo.email}
@@ -54,7 +54,7 @@ export default function Profile({update, add, onSelectArt}){
                         profilePic={userInfo.profilePic}
                         setupdated={setUpdated}
                         id={userInfo._id}
-                      />
+                      />}
                   </Col>
                 </Row>
               </Col>

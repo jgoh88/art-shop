@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import artShopBackendAxios from "../../configs/artShopBackendConfig"
 import { Form, Container, Row, Col } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
 import { useUserHook } from "../../hooks/useUserHook"
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 
@@ -10,11 +9,8 @@ function EditProfileComponent (props) {
     
     const [modal, setModal] = useState(false);
     const toggle = ()=> setModal(!modal);
-
-    const navigate = useNavigate()
     const userHook = useUserHook()
     const [formInput, setFormInput] = useState({
-        // username: props.username,
         fullName: props.fullName,
         email: props.email,
         contactNo: props.contactNo,
@@ -36,7 +32,6 @@ function EditProfileComponent (props) {
             }   
         })
     }, [])
-
 
     function onFormChangeHandler(e) {
         let value
@@ -76,7 +71,7 @@ function EditProfileComponent (props) {
         <Button onClick={toggle}>
           Edit Profile
         </Button>
-        <Modal isOpen={modal} toggle={toggle} {...props}>
+        <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Edit profile</ModalHeader>
           <ModalBody>
            <Container>
