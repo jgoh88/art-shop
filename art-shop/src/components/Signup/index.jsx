@@ -73,6 +73,9 @@ export default function Signup() {
         if (formInput.password === '') {
             error.password = 'Password is required'
         }
+        if (formInput.password !== '' && formInput.password.length < 6) {
+            error.password = 'Passwords need to be at least 6 characters long'
+        }
         if (formInput.fullName === '') {
             error.fullName = 'Full name is required'
         }
