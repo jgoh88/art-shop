@@ -36,7 +36,11 @@ function App() {
             } />
             <Route path={"/"} element={<Home />} />
             <Route path={"/search"} element={<Search />} />
-            <Route path={"/profile"} element={<Profile />} />
+            <Route path={"/profile"} element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
             <Route path={"/myart"} element={
               <ProtectedRoute>
                 <MyArt />
