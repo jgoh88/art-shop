@@ -2,7 +2,7 @@
 ## Introduction/Overview
 This project was inspired by e-commerce/marketplace related web applications. It is a marketplace platform for connectingartists with art enthusiasts and collectors, and for artists to promote and sell their artworks. Artists (sellers) can list their artworks, and users can buy those artworks by adding them to cart and then checkout. This application was built as part of my GA 4-day group project.
 
-Features of web part of the application:
+Features of the application:
 * Register account and login
 * List and manage artworks
 * Listing and search for artworks
